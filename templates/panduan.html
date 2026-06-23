@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panduan – Sistem Deteksi Varietas Beras</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --blue: #1a6ff0;
+        --blue-dark: #1558c8;
+        --blue-light: #ebf2ff;
+        --text-dark: #0d1117;
+        --text-mid: #4b5563;
+        --text-light: #6b7280;
+        --bg: #f4f6f9;
+        --white: #ffffff;
+        --border: #e2e8f0;
+        --navy: #1e3a8a;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text-dark);
+        min-height: 100vh;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 0 48px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-brand {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--blue);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-mid);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a.active,
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+      .nav-links a.active {
+        font-weight: 700;
+        border-bottom: 2px solid var(--blue);
+        padding-bottom: 2px;
+      }
+
+      /* ── PAGE HEADER ── */
+      .page-header {
+        text-align: center;
+        padding: 56px 24px 44px;
+        animation: fadeUp 0.5s ease both;
+      }
+      .page-header h1 {
+        font-size: 40px;
+        font-weight: 800;
+        letter-spacing: -0.9px;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+      }
+      .page-header p {
+        font-size: 16px;
+        color: var(--text-mid);
+      }
+
+      /* ── MAIN CONTENT ── */
+      .content-wrap {
+        max-width: 860px;
+        margin: 0 auto 80px;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* ── CARD ── */
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 36px 40px;
+        transition: box-shadow 0.2s;
+        animation: fadeUp 0.55s ease both;
+      }
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .card-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .icon-blue {
+        background: var(--blue-light);
+      }
+      .icon-orange {
+        background: #fef3c7;
+      }
+
+      .card h2 {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--text-dark);
+        letter-spacing: -0.3px;
+      }
+
+      /* ── ORDERED LIST ── */
+      .guide-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .guide-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        font-size: 15px;
+        color: var(--text-mid);
+        line-height: 1.6;
+      }
+
+      .list-num {
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+        margin-top: 1px;
+      }
+
+      .num-blue {
+        background: var(--blue-light);
+        color: var(--blue);
+      }
+      .num-orange {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      /* ── DIVIDER ── */
+      .list-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 2px 0;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 640px) {
+        nav {
+          padding: 0 16px;
+        }
+        .nav-brand {
+          font-size: 14px;
+        }
+        .nav-links {
+          gap: 18px;
+        }
+        .nav-links a {
+          font-size: 13px;
+        }
+
+        .page-header {
+          padding: 36px 16px 28px;
+        }
+        .page-header h1 {
+          font-size: 26px;
+        }
+        .page-header p {
+          font-size: 14px;
+        }
+
+        .content-wrap {
+          padding: 0 16px;
+        }
+        .card {
+          padding: 24px 20px;
+        }
+        .card h2 {
+          font-size: 18px;
+        }
+        .guide-list li {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="{{ url_for('dashboard') }}" class="nav-brand"
+        >Sistem Deteksi Varietas Beras</a
+      >
+      <ul class="nav-links">
+        <li><a href="{{ url_for('dashboard') }}">Beranda</a></li>
+        <li><a href="{{ url_for('deteksi') }}">Deteksi</a></li>
+        <li><a href="{{ url_for('panduan') }}" class="active">Panduan</a></li>
+      </ul>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+      <h1>Panduan dan Syarat Ketentuan</h1>
+      <p>Berikut adalah panduan dan syarat ketentuan penggunaan website</p>
+    </header>
+
+    <!-- CARDS -->
+    <div class="content-wrap">
+      <!-- Panduan Penggunaan -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2L2 7l10 5 10-5-10-5z"
+                stroke="#1A6FF0"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 17l10 5 10-5"
+                stroke="#1A6FF0"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12l10 5 10-5"
+                stroke="#1A6FF0"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h2>Panduan Penggunaan</h2>
+        </div>
+
+        <ol class="guide-list">
+          <li>
+            <span class="list-num num-blue">1</span>
+            <span
+              >Unggah gambar dengan drag &amp; drop atau pilih gambar melalui
+              perangkat anda</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-blue">2</span>
+            <span
+              >Format file yang didukung berupa JPG, PNG, atau JPEG dengan
+              ukuran maksimal 10MB</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-blue">3</span>
+            <span>Klik tombol deteksi dan tunggu sampai proses selesai</span>
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-blue">4</span>
+            <span
+              >Sistem akan menampilkan bounding box pada butir beras dengan
+              label varietas dan nilai confidence score</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <!-- Syarat dan Ketentuan -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M9 11l3 3L22 4"
+                stroke="#D97706"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+                stroke="#D97706"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h2>Syarat dan Ketentuan</h2>
+        </div>
+
+        <ol class="guide-list">
+          <li>
+            <span class="list-num num-orange">1</span>
+            <span
+              >Gambar yang diupload harus berupa gambar butir beras dan terlihat
+              jelas atau tidak buram</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-orange">2</span>
+            <span
+              >Sistem hanya mengenali 3 varietas, yaitu Ciherang, IR64, dan
+              Mentik dan tidak mendukung deteksi varietas lain</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-orange">3</span>
+            <span
+              >Butir beras terlihat jelas dan tidak terlalu tumpang tindih</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-orange">4</span>
+            <span
+              >Sistem tidak digunakan untuk analisis kualitas beras (protein,
+              amilosa, dll.)</span
+            >
+          </li>
+          <div class="list-divider"></div>
+          <li>
+            <span class="list-num num-orange">5</span>
+            <span
+              >Hasil bersifat prediktif berdasarkan model pembelajaran
+              mesin</span
+            >
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Deteksi Varietas Beras</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --blue: #1a6ff0;
+        --blue-light: #ebf2ff;
+        --text-dark: #0d1117;
+        --text-mid: #4b5563;
+        --text-light: #6b7280;
+        --bg: #f4f6f9;
+        --white: #ffffff;
+        --border: #e2e8f0;
+        --green: #22c55e;
+        --green-light: #dcfce7;
+        --purple: #a855f7;
+        --purple-light: #f3e8ff;
+        --orange: #f59e0b;
+        --orange-light: #fef3c7;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-dark);
+        min-height: 100vh;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 0 48px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-brand {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-mid);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .nav-links a.active,
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+
+      .nav-links a.active {
+        font-weight: 700;
+        border-bottom: 2px solid var(--blue);
+        padding-bottom: 2px;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        max-width: 900px;
+        margin: 80px auto 60px;
+        padding: 0 48px;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 14px;
+        color: var(--text-dark);
+      }
+
+      .hero .subtitle {
+        font-size: 20px;
+        color: var(--text-mid);
+        font-weight: 400;
+        margin-bottom: 24px;
+      }
+
+      .hero .description {
+        font-size: 15.5px;
+        color: var(--text-light);
+        line-height: 1.65;
+        max-width: 520px;
+        margin-bottom: 36px;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        background: var(--blue);
+        color: #fff;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        box-shadow: 0 4px 14px rgba(26, 111, 240, 0.3);
+      }
+
+      .btn-primary:hover {
+        background: #1558c8;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(26, 111, 240, 0.38);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--blue);
+        border: 2px solid var(--blue);
+        padding: 13px 28px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+
+      .btn-outline:hover {
+        background: var(--blue-light);
+        transform: translateY(-1px);
+      }
+
+      /* ── STAT CARDS ── */
+      .stats {
+        max-width: 900px;
+        margin: 0 auto 80px;
+        padding: 0 48px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        animation: fadeUp 0.7s 0.15s ease both;
+      }
+
+      .stat-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px 18px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .stat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+      }
+
+      .icon-blue {
+        background: var(--blue-light);
+      }
+      .icon-green {
+        background: var(--green-light);
+      }
+      .icon-purple {
+        background: var(--purple-light);
+      }
+      .icon-orange {
+        background: var(--orange-light);
+      }
+
+      .stat-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text-light);
+        line-height: 1.3;
+      }
+
+      .stat-value {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin-top: 2px;
+        letter-spacing: -0.5px;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        nav {
+          padding: 0 20px;
+        }
+        .hero,
+        .stats {
+          padding: 0 20px;
+        }
+        .hero {
+          margin-top: 48px;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .hero .subtitle {
+          font-size: 17px;
+        }
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .stats {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="{{ url_for('dashboard') }}" class="nav-brand"
+        >Sistem Deteksi Varietas Beras</a
+      >
+      <ul class="nav-links">
+        <li><a href="{{ url_for('dashboard') }}" class="active">Beranda</a></li>
+        <li><a href="{{ url_for('deteksi') }}">Deteksi</a></li>
+        <li><a href="{{ url_for('panduan') }}">Panduan</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Sistem Deteksi Varietas Beras</h1>
+      <p class="subtitle">
+        Identifikasi varietas beras dengan cepat dan akurat
+      </p>
+      <p class="description">
+        Unggah gambar butir beras anda, dan sistem akan mendeteksi varietas
+        beras secara otomatis
+      </p>
+      <div class="btn-group">
+        <button
+          class="btn-primary"
+          onclick="location.href='{{ url_for('deteksi') }}'"
+        >
+          Mulai Deteksi
+        </button>
+
+        <button
+          class="btn-outline"
+          onclick="location.href='{{ url_for('panduan') }}'"
+        >
+          Panduan
+        </button>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+      <!-- Database Varietas -->
+      <div class="stat-card">
+        <div class="stat-icon icon-blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <ellipse
+              cx="12"
+              cy="5"
+              rx="9"
+              ry="3"
+              stroke="#1A6FF0"
+              stroke-width="2"
+            />
+            <path
+              d="M3 5v4c0 1.657 4.03 3 9 3s9-1.343 9-3V5"
+              stroke="#1A6FF0"
+              stroke-width="2"
+            />
+            <path
+              d="M3 9v4c0 1.657 4.03 3 9 3s9-1.343 9-3V9"
+              stroke="#1A6FF0"
+              stroke-width="2"
+            />
+            <path
+              d="M3 13v4c0 1.657 4.03 3 9 3s9-1.343 9-3v-4"
+              stroke="#1A6FF0"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Database<br />Varietas</span>
+          <span class="stat-value">3</span>
+        </div>
+      </div>
+
+      <!-- Akurasi Model -->
+      <div class="stat-card">
+        <div class="stat-icon icon-green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+              stroke="#22C55E"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Akurasi<br />Model</span>
+          <span class="stat-value">88%</span>
+        </div>
+      </div>
+
+      <!-- Waktu Deteksi -->
+      <div class="stat-card">
+        <div class="stat-icon icon-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="#A855F7" stroke-width="2" />
+            <path
+              d="M12 7v5l3 3"
+              stroke="#A855F7"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Waktu<br />Deteksi</span>
+          <span class="stat-value">&lt;5s</span>
+        </div>
+      </div>
+
+      <!-- Total Deteksi -->
+      <div class="stat-card">
+        <div class="stat-icon icon-orange">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="3"
+              stroke="#F59E0B"
+              stroke-width="2"
+            />
+            <path
+              d="M7 14l3-3 2 2 5-5"
+              stroke="#F59E0B"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Total<br />Deteksi</span>
+          <span class="stat-value">300+</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
