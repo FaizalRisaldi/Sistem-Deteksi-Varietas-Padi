@@ -1,5 +1,8 @@
 flask
+gunicorn
 torch
 torchvision
 pillow
 matplotlib
+gdown
+opencv-python-headless
