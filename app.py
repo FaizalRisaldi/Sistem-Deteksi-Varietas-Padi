@@ -2,15 +2,17 @@ from flask import Flask, render_template, request
 import os
 from utils.model_loader import load_model
 from utils.inference import run_inference
+from download_model import download_model
 
 app = Flask(__name__)
+download_model()
 
 model = load_model("model/best_model.pth", num_classes=4)
 
 UPLOAD_FOLDER = "static/uploads"
 RESULT_FOLDER = "static/results"
 
-# ✅ AUTO CREATE FOLDER
+#AUTO CREATE FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
 
@@ -39,21 +41,21 @@ def hasil():
 
     filename = file.filename
 
-    # ✅ 1. buat path
+    #1. buat path
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-    # ✅ 2. simpan file
+    #2. simpan file
     file.save(filepath)
 
-    # ✅ 3. path untuk ditampilkan (original)
+    #3. path untuk ditampilkan (original)
     original_path = f"uploads/{filename}"
 
-    # ✅ 4. jalankan model
+    #4. jalankan model
     result_path, total, ciherang, ir64, mentik, boxes = run_inference(
         model, filepath, RESULT_FOLDER
     )
 
-    # ✅ 5. rapikan path hasil
+    #5. rapikan path hasil
     result_path = result_path.replace("\\", "/")
     result_path = result_path.split("static/")[-1]
 
